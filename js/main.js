@@ -1,5 +1,6 @@
 const PEOPLE_COUNT = 25;
 
+
 const DESCRIPTION = [
   'Разве жизнь не прекрасна?',
   'Дома',
@@ -43,7 +44,7 @@ const createNumberPool = (min, max) => {
     };
   }
 };
-
+const numberPoolUrl = createNumberPool(1,25);
 //функция на проверку длины строки
 const checkLineLength = (line, maxLength) => line.length <= maxLength;
 
@@ -51,7 +52,7 @@ const getRandomElement = (elements) => elements[getRandomPositiveInteger(0, elem
 
 const createPhoto = (id) => ({
   id,
-  url: `photos/${createNumberPool(1,25)}.jpg`,
+  url: `photos/$${numberPoolUrl()}.jpg`,
   description: getRandomElement(DESCRIPTION),
   likes: getRandomPositiveInteger(15, 200),
   comments: getRandomPositiveInteger(0,200)
@@ -60,6 +61,6 @@ const createPhoto = (id) => ({
 const createPhotos = () => Array.from({length: PEOPLE_COUNT}, (id, index) => createPhoto(index + 1));
 
 checkLineLength(20,40);
-createPhotos();
+console.log(createPhotos());
 
 
