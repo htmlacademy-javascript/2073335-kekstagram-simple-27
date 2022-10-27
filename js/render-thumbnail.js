@@ -1,6 +1,3 @@
-import { createPhotos } from './data.js';
-
-const renderPhoto = createPhotos();
 const thumbnailsTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
@@ -9,8 +6,8 @@ const thumbnailsTemplate = document.querySelector('#picture')
 const picturesListElement = document.querySelector('.pictures');
 const thumbnailsListFragment = document.createDocumentFragment();
 
-const renderPhotos = () => {
-  renderPhoto.forEach(({url, likes, comments}) => {
+const renderPhotos = (photos) => {
+  photos.forEach(({url, likes, comments}) => {
     const renderThumbnails = thumbnailsTemplate.cloneNode(true);
 
     renderThumbnails.querySelector('.picture__img').src = url;
