@@ -32,4 +32,6 @@ const createNumberPool = (min, max) => {
   }
 };
 
-export {getRandomPositiveInteger, getRandomElement, createNumberPool};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomPositiveInteger, getRandomElement, createNumberPool, isEscapeKey};

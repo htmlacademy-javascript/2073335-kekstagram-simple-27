@@ -1,7 +1,5 @@
 import {getRandomPositiveInteger, getRandomElement,} from './util.js';
 
-const PEOPLE_COUNT = 25;
-
 const DESCRIPTION = [
   'Разве жизнь не прекрасна?',
   'Дома',
@@ -22,6 +20,6 @@ const createPhoto = (id,) => ({
   comments: getRandomPositiveInteger(0,200)
 });
 
-const createPhotos = () => Array.from({length: PEOPLE_COUNT}, (id, index) => createPhoto(index + 1));
+const createPhotos = (length) => Array.from({length: length}, (id, index) => createPhoto(index + 1));
 
 export {createPhotos};
