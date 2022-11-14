@@ -2,7 +2,6 @@ const thumbnailsTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
 
-
 const picturesListElement = document.querySelector('.pictures');
 const thumbnailsListFragment = document.createDocumentFragment();
 

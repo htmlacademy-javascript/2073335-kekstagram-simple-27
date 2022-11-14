@@ -3,11 +3,9 @@ const scaleControlBiggerElement = document.querySelector('.scale__control--bigge
 const scaleControlValueElement = document.querySelector('.scale__control--value');
 const imgUploadPreviewElement = document.querySelector('.img-upload__preview');
 
-
 const MIN_SCALE = 25;
 const MAX_SCALE = 100;
 const DEFAULT_SCALE = 100;
-
 let defaultScale = DEFAULT_SCALE;
 
 const editPhoto = () => {
@@ -16,7 +14,7 @@ const editPhoto = () => {
     if (defaultScale > MIN_SCALE) {
       defaultScale -= MIN_SCALE;
       scaleControlValueElement.value = `${defaultScale}%`;
-      imgUploadPreviewElement.style.transform = `scale(${defaultScale / 100})`;
+      imgUploadPreviewElement.style.transform = `scale(${defaultScale / DEFAULT_SCALE})`;
     }
   });
 
@@ -24,15 +22,14 @@ const editPhoto = () => {
     if (defaultScale < MAX_SCALE) {
       defaultScale += MIN_SCALE;
       scaleControlValueElement.value = `${defaultScale}%`;
-      imgUploadPreviewElement.style.transform = `scale(${defaultScale / 100})`;
-
+      imgUploadPreviewElement.style.transform = `scale(${defaultScale / DEFAULT_SCALE})`;
     }
   });
 };
 
 const settingScaleValue = (value) => {
   scaleControlValueElement.value = `${value}%`;
-  imgUploadPreviewElement.style.transform = `scale(${value / 100})`;
+  imgUploadPreviewElement.style.transform = `scale(${value / DEFAULT_SCALE})`;
 };
 
 settingScaleValue(defaultScale);
@@ -40,7 +37,7 @@ settingScaleValue(defaultScale);
 const resetPhoto = () => {
   defaultScale = MAX_SCALE;
   settingScaleValue(MAX_SCALE);
-  imgUploadPreviewElement.style.transform = `scale(${defaultScale / 100})`;
+  imgUploadPreviewElement.style.transform = `scale(${defaultScale / DEFAULT_SCALE})`;
 };
 
 editPhoto();

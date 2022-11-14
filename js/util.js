@@ -1,4 +1,17 @@
-//Функция, передающая случайное число из переданного диапазона, без повторений
+import { closeWindowEdit } from './modal.js';
+
+const errorTemplate = document.querySelector('#error')
+  .content
+  .querySelector('.error');
+
+const successTemplate = document.querySelector('#success')
+  .content
+  .querySelector('.success');
+
+
+const successWindow = successTemplate.cloneNode(true);
+const errorWindow = errorTemplate.cloneNode(true);
+
 const getRandomPositiveInteger = (a, b) => {
 
   if (a < 0 || b < 0) {
@@ -12,26 +25,68 @@ const getRandomPositiveInteger = (a, b) => {
 };
 
 const getRandomElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
-// чтобы не использовать рекурсию
-const createNumberPool = (min, max) => {
-  if (min < max) {
-    const pool = new Set();
-    return () => {
-      if (pool.size >= max - min) {
+const closeSuccess = () => {
+  successWindow.remove();
+  closeWindowEdit();
+};
 
-        throw Error('pool size exceeded');
-      }
-      let val = getRandomPositiveInteger(min, max);
-      while (pool.has(val)) {
-        val = getRandomPositiveInteger(min, max);
-      }
-
-      return val;
-    };
+const onClickBeyondModalSuccess = (evt) => {
+  if(evt.target.matches('.success')) {
+    closeSuccess();
+    removeEventListener('click', onClickBeyondModalSuccess);
   }
 };
 
-const isEscapeKey = (evt) => evt.key === 'Escape';
+const escCloseSuccess = (evt) => {
 
-export {getRandomPositiveInteger, getRandomElement, createNumberPool, isEscapeKey};
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeSuccess();
+  }
+};
+
+const showSuccess = () => {
+  document.body.append(successWindow);
+
+  const successButton = document.querySelector('.success__button');
+
+  document.addEventListener('click', onClickBeyondModalSuccess);
+  document.addEventListener('keydown', escCloseSuccess);
+  successButton.addEventListener('click', closeSuccess);
+};
+
+const onClickBeyondModalError = (evt) => {
+  if(evt.target.matches('.error')) {
+    closeError();
+    removeEventListener('click', onClickBeyondModalError);
+  }
+};
+
+const escCloseError = (evt) => {
+
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeError();
+    document.body = '';
+  }
+};
+
+const showError = () => {
+
+  document.body.append(errorWindow);
+
+  const errorButton = document.querySelector('.error__button');
+
+  errorButton.addEventListener('click', closeError);
+
+  document.addEventListener('keydown', escCloseError);
+  document.addEventListener('click', onClickBeyondModalError);
+};
+
+function closeError() {
+  errorWindow.remove();
+}
+
+export {getRandomPositiveInteger, getRandomElement, isEscapeKey, showError, showSuccess};
