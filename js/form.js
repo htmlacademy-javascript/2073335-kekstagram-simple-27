@@ -1,5 +1,5 @@
 import { sendData } from './api.js';
-import {showAlert} from './util.js';
+import {showError, showSuccess} from './util.js';
 
 const imgUploadForm = document.querySelector('#upload-select-image');
 const uploadSubmit = document.querySelector('#upload-submit');
@@ -8,13 +8,11 @@ const textDescription = document.querySelector('.text__description');
 const MIN_LENGTH_TEXT = 20;
 const MAX_LENGTH_TEXT = 140;
 
-
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__text',
   errorTextParent: 'img-upload__text',
   errorTextTag: 'span',
   errorTextClass: 'form__error'
-
 });
 
 Pristine.addMessages('ru', {
@@ -51,7 +49,7 @@ const unblockSubmitButton = () => {
 };
 
 
-const setUserFormSubmit = (onSuccess) => {
+const setUserFormSubmit = () => {
   imgUploadForm.addEventListener('submit', (evt) => {
     onFormDisable();
     evt.preventDefault();
@@ -59,11 +57,14 @@ const setUserFormSubmit = (onSuccess) => {
     const isValid = pristine.validate();
     if (isValid) {
       sendData(
-        () => { onSuccess();
+        evt,
+        () => {
           blockSubmitButton();
+          showSuccess();
+
         },
         () => {
-          showAlert();
+          showError();
           unblockSubmitButton();
         },
         new FormData(evt.target)

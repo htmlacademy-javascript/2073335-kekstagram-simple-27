@@ -68,7 +68,8 @@ noUiSlider.create(effectLevelSlider, {
   start: selectedEffect.max,
   step: selectedEffect.step,
   connect: 'lower',
-},);
+},
+);
 
 const updateSlider = () => {
   effectLevelSlider.classList.remove('hidden');
@@ -92,13 +93,14 @@ const updateSlider = () => {
 const resetEffets = () => {
   selectedEffect = DEFAULT_EFFECT;
   updateSlider();
+  imgUploadForm.reset();
+  imgUploadForm.value = '';
 };
 
 const onFilterChange = (evt) => {
   if (!evt.target.classList.contains('effects__radio')) {
     return;
   }
-
   selectedEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
   imgUploadPreview.className = '';
   imgUploadPreview.classList.add(`effects__preview--${selectedEffect.name}`);
