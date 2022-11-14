@@ -1,15 +1,21 @@
-import { createPhotos } from './data.js';
-import { renderPhotos } from './render-thumbnail.js';
-import { clickOnUploadFile, closeWindowEdit } from './form.js';
-import { onValidationForm } from './validation-form.js';
+import { clickOnUploadFile, closeWindowEdit } from './modal.js';
+import { setUserFormSubmit } from './form.js';
 import { resetPhoto } from './edit-photo.js';
-import { onFilterChange } from './filter.js';
+import './filter.js';
+import './api.js';
+import { showAlert, showSuccess } from './util.js';
+import { getData } from './api.js';
+import { renderPhotos } from './render-thumbnail.js';
 
-renderPhotos(createPhotos(25));
+
 clickOnUploadFile();
-onValidationForm();
 closeWindowEdit();
-
 resetPhoto();
-onFilterChange();
+
+getData((picture) => {
+  renderPhotos(picture);
+});
+
+
+setUserFormSubmit(showSuccess, showAlert,);
 

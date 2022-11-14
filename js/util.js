@@ -1,4 +1,11 @@
-//Функция, передающая случайное число из переданного диапазона, без повторений
+
+const errorTemplate = document.querySelector('#error')
+  .content
+  .querySelector('.error');
+
+const successTemplate = document.querySelector('#success')
+  .content
+  .querySelector('.success');
 const getRandomPositiveInteger = (a, b) => {
 
   if (a < 0 || b < 0) {
@@ -34,4 +41,39 @@ const createNumberPool = (min, max) => {
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomPositiveInteger, getRandomElement, createNumberPool, isEscapeKey};
+const showSuccess = () => {
+  const successWindow = successTemplate.cloneNode(true);
+  document.body.append(successWindow);
+  const successButton = document.querySelector('success__button');
+  successButton.addEventListener('click', () => {
+    showSuccess.remove();
+  });
+  document.addEventListener('keydown', (evt) => {
+    if (isEscapeKey(evt)) {
+      showSuccess.remove();
+      document.body = '';
+    }
+  });
+  window.addEventListener('click', () => {
+    showSuccess.remove();
+  });
+};
+
+const showAlert = () => {
+  const errorWindow = errorTemplate.cloneNode(true);
+  document.body.append(errorWindow);
+  const errorButton = document.querySelector('.error__button');
+  errorButton.addEventListener('click', () => {
+    errorWindow.remove();
+  });
+  document.addEventListener('keydown', (evt) => {
+    if (isEscapeKey(evt)) {
+      evt.preventDefault();
+      errorWindow.remove();
+    }
+
+  });
+};
+
+
+export {getRandomPositiveInteger, getRandomElement, createNumberPool, isEscapeKey, showAlert, showSuccess};
