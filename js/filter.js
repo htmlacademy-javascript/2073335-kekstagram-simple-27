@@ -1,8 +1,3 @@
-const imgUploadPreview = document.querySelector('.img-upload__preview img');
-const imgUploadForm = document.querySelector('.img-upload__form');
-const effectLevelSlider = document.querySelector('.effect-level__slider');
-const effectLevelValue = document.querySelector('.effect-level__value');
-
 const EFFECTS = [
   {
     name: 'none',
@@ -53,8 +48,14 @@ const EFFECTS = [
     unit: ''
   },
 ];
+
 const DEFAULT_EFFECT = EFFECTS[0];
 let selectedEffect = DEFAULT_EFFECT;
+
+const imgUploadPreview = document.querySelector('.img-upload__preview img');
+const imgUploadForm = document.querySelector('.img-upload__form');
+const effectLevelSlider = document.querySelector('.effect-level__slider');
+const effectLevelValue = document.querySelector('.effect-level__value');
 
 const isDefault = function () {
   return selectedEffect === DEFAULT_EFFECT;
