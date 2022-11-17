@@ -11,8 +11,6 @@ const MAX_LENGTH_TEXT = 140;
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__text',
   errorTextParent: 'img-upload__text',
-  errorTextTag: 'span',
-  errorTextClass: 'form__error'
 });
 
 Pristine.addMessages('ru', {
