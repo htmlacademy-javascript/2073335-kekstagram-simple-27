@@ -1,12 +1,12 @@
 import { sendData } from './api.js';
 import {showError, showSuccess} from './util.js';
 
+const MIN_LENGTH_TEXT = 20;
+const MAX_LENGTH_TEXT = 140;
+
 const imgUploadForm = document.querySelector('#upload-select-image');
 const uploadSubmit = document.querySelector('#upload-submit');
 const textDescription = document.querySelector('.text__description');
-
-const MIN_LENGTH_TEXT = 20;
-const MAX_LENGTH_TEXT = 140;
 
 const pristine = new Pristine(imgUploadForm, {
   classTo: 'img-upload__text',
